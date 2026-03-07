@@ -1465,12 +1465,12 @@ GameObject:
   - component: {fileID: 6092798791301266068}
   - component: {fileID: 3603413488789683016}
   - component: {fileID: 5287103974544471784}
-  - component: {fileID: 5210804496989896685}
   - component: {fileID: 5257124338599711099}
   - component: {fileID: 5559894370955821158}
   - component: {fileID: 8413656893716276336}
   - component: {fileID: 4516970089078468042}
   - component: {fileID: 2212769079560297516}
+  - component: {fileID: 8082614573556982639}
   m_Layer: 0
   m_Name: Player Rig
   m_TagString: Untagged
@@ -1554,31 +1554,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fa7b4195685c3846be746c74f0ab2f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.XR.Interaction.Toolkit::UnityEngine.XR.Interaction.Toolkit.Locomotion.LocomotionMediator
---- !u!143 &5210804496989896685
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8492285161495621732}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Height: 2
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5257124338599711099
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1722,6 +1697,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealthUI
   playerHealth: {fileID: 4516970089078468042}
   healthSlider: {fileID: 4598678423012590300}
+--- !u!54 &8082614573556982639
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8492285161495621732}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &9044488328196799988
 GameObject:
   m_ObjectHideFlags: 0

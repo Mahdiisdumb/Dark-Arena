@@ -19,14 +19,12 @@ public class SwordDamage : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (damageCollider == null || other != damageCollider) return;
-
-        MonsterBase monster = other.GetComponent<MonsterBase>();
+        MonsterBase monster = other.GetComponentInParent<MonsterBase>();
         if (monster == null) return;
 
-        if (requireSwing && rb != null && rb.linearVelocity.magnitude < minSwingSpeed) return;
+        if (requireSwing && rb != null && rb.linearVelocity.magnitude < minSwingSpeed)
+            return;
 
         monster.TakeDamage(damage);
-        Debug.Log($"Hit {monster.name} for {damage} damage!");
     }
 }

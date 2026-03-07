@@ -7,12 +7,13 @@ public class MonsterSpawner : MonoBehaviour
     public float spawnHeight = 0f;
     public float spawnInterval = 5f;
 
-    private GameObject[] monsterPrefabs;
-    private float timer;
+    GameObject[] monsterPrefabs;
+    float timer;
 
     void Start()
     {
         monsterPrefabs = Resources.LoadAll<GameObject>("monsters");
+
         if (monsterPrefabs.Length == 0)
         {
             Debug.LogError("No monsters in Resources/monsters!");
@@ -29,6 +30,7 @@ public class MonsterSpawner : MonoBehaviour
     void Update()
     {
         timer -= Time.deltaTime;
+
         if (timer <= 0f)
         {
             SpawnMonster();
@@ -39,6 +41,7 @@ public class MonsterSpawner : MonoBehaviour
     void SpawnMonster()
     {
         GameObject prefab = monsterPrefabs[Random.Range(0, monsterPrefabs.Length)];
+
         Vector3 pos = transform.position + new Vector3(
             Random.Range(-spawnArea.x / 2f, spawnArea.x / 2f),
             spawnHeight,

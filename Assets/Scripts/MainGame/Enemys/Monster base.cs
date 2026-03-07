@@ -12,9 +12,9 @@ public class MonsterBase : MonoBehaviour
     [HideInInspector]
     public Transform player;
 
-    protected Rigidbody rb;
-    private float attackTimer = 0f;
-    private bool isDead = false;
+    Rigidbody rb;
+    float attackTimer = 0f;
+    bool isDead = false;
 
     protected virtual void Start()
     {
@@ -22,10 +22,11 @@ public class MonsterBase : MonoBehaviour
         rb.freezeRotation = true;
 
         GameObject p = GameObject.FindGameObjectWithTag("Player");
+
         if (p != null)
             player = p.transform;
         else
-            Debug.LogWarning("No Player tagged object found.");
+            Debug.LogWarning("No object tagged Player found.");
     }
 
     protected virtual void FixedUpdate()
@@ -41,6 +42,7 @@ public class MonsterBase : MonoBehaviour
         else
         {
             attackTimer -= Time.fixedDeltaTime;
+
             if (attackTimer <= 0f)
             {
                 Attack();
@@ -52,23 +54,36 @@ public class MonsterBase : MonoBehaviour
     protected virtual void MoveTowardsPlayer()
     {
         Vector3 dir = (player.position - transform.position).normalized;
-        rb.MovePosition(transform.position + dir * moveSpeed * Time.fixedDeltaTime);
+
+        rb.MovePosition(
+            transform.position + dir * moveSpeed * Time.fixedDeltaTime
+        );
+
         FacePlayer();
     }
 
     protected virtual void FacePlayer()
     {
-        Vector3 lookPos = new Vector3(player.position.x, transform.position.y, player.position.z);
+        Vector3 lookPos = new Vector3(
+            player.position.x,
+            transform.position.y,
+            player.position.z
+        );
+
         transform.LookAt(lookPos);
     }
 
     protected virtual void Attack()
     {
-        if (player != null)
+        if (player == null) return;
+
+        // safer for VR rigs where the health script may be on parent
+        PlayerHealth ph = player.GetComponentInParent<PlayerHealth>();
+
+        if (ph != null)
         {
-            PlayerHealth ph = player.GetComponent<PlayerHealth>();
-            if (ph != null)
-                ph.TakeDamage(damage);
+            ph.TakeDamage(damage);
+            Debug.Log(name + " attacked player for " + damage);
         }
     }
 
@@ -77,13 +92,21 @@ public class MonsterBase : MonoBehaviour
         if (isDead) return;
 
         health -= amount;
+
+        Debug.Log(name + " took " + amount + " damage. HP: " + health);
+
         if (health <= 0f)
             Die();
     }
 
     protected virtual void Die()
     {
+        if (isDead) return;
+
         isDead = true;
+
+        Debug.Log(name + " died.");
+
         Destroy(gameObject);
     }
 }
